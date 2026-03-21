@@ -1,0 +1,11 @@
+experiment,env,policy,lr,gamma,batch_size,epsilon_start,epsilon_end,epsilon_fraction,timesteps,mean_reward,std_reward,training_time_s
+exp1_baseline,BreakoutNoFrameskip-v0,CnnPolicy,0.0001,0.99,32,1.0,0.01,0.1,200000,0.5,0.5,758.96537566185
+exp2_high_lr,BreakoutNoFrameskip-v0,CnnPolicy,0.001,0.99,32,1.0,0.01,0.1,200000,0.4,0.8000000000000002,752.5779445171356
+exp3_low_lr,BreakoutNoFrameskip-v0,CnnPolicy,1e-05,0.99,32,1.0,0.01,0.1,200000,0.3,0.6403124237432849,754.8624930381775
+exp4_low_gamma,BreakoutNoFrameskip-v0,CnnPolicy,0.0001,0.9,32,1.0,0.01,0.1,200000,0.0,0.0,755.6098477840424
+exp5_high_gamma,BreakoutNoFrameskip-v0,CnnPolicy,0.0001,0.999,32,1.0,0.01,0.1,200000,0.2,0.6000000000000001,754.261069059372
+exp6_large_batch,BreakoutNoFrameskip-v0,CnnPolicy,0.0001,0.99,64,1.0,0.01,0.1,200000,0.4,0.9165151389911681,789.2429993152618
+exp7_small_batch,BreakoutNoFrameskip-v0,CnnPolicy,0.0001,0.99,16,1.0,0.01,0.1,200000,0.5,0.6708203932499369,734.3028378486633
+exp8_slow_decay,BreakoutNoFrameskip-v0,CnnPolicy,0.0001,0.99,32,1.0,0.01,0.3,200000,0.5,0.806225774829855,741.3967025279999
+exp9_mlp_baseline,BreakoutNoFrameskip-v0,MlpPolicy,0.0001,0.99,32,1.0,0.01,0.1,200000,0.1,0.30000000000000004,648.5719695091248
+exp10_mlp_tuned,BreakoutNoFrameskip-v0,MlpPolicy,0.0005,0.95,64,1.0,0.05,0.2,200000,0.5,0.806225774829855,669.352242231369

@@ -1,0 +1,11 @@
+experiment_name,policy,lr,gamma,batch_size,epsilon_start,epsilon_end,epsilon_fraction,buffer_size,learning_starts,train_freq,target_update_interval
+exp1_mlp_baseline,MlpPolicy,0.0001,0.99,32,1,0.01,0.1,10000,100,4,1000
+exp2_mlp_high_lr,MlpPolicy,0.001,0.99,32,1,0.01,0.1,10000,100,4,1000
+exp3_cnn_mid_lr,CnnPolicy,0.0005,0.99,32,1,0.01,0.1,10000,100,4,1000
+exp4_cnn_gamma95,CnnPolicy,0.0001,0.95,32,1,0.01,0.1,10000,100,4,1000
+exp5_large_batch_128,CnnPolicy,0.0001,0.99,128,1,0.01,0.1,10000,100,4,1000
+exp6_combo_high_lr_low_gamma,CnnPolicy,0.001,0.9,32,1,0.01,0.1,10000,100,4,1000
+exp7_combo_low_lr_high_gamma,CnnPolicy,0.00005,0.999,64,1,0.01,0.1,10000,100,4,1000
+exp8_cnn_balanced,CnnPolicy,0.0001,0.99,32,1,0.01,0.2,100000,50000,4,1000
+exp9_cnn_lr25e5_bs64,CnnPolicy,0.00025,0.99,64,1,0.01,0.25,150000,50000,4,1000
+exp10_cnn_stable_bs64,CnnPolicy,0.0001,0.99,64,1,0.01,0.3,200000,50000,4,1000

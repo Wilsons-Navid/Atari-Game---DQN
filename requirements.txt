@@ -1,0 +1,8 @@
+stable-baselines3[extra]
+gymnasium[atari]
+gymnasium[accept-rom-license]
+ale-py
+shimmy>=0.2.1
+tensorboard
+opencv-python
+numpy>=2.0

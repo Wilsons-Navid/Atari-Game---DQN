@@ -1,0 +1,11 @@
+experiment_name,policy,lr,gamma,batch_size,epsilon_start,epsilon_end,epsilon_fraction
+exp1_mlp_baseline,MlpPolicy,0.0001,0.99,32,1.0,0.01,0.1
+exp2_mlp_high_lr,MlpPolicy,0.001,0.99,32,1.0,0.01,0.1
+exp3_cnn_mid_lr,CnnPolicy,0.0005,0.99,32,1.0,0.01,0.1
+exp4_cnn_gamma95,CnnPolicy,0.0001,0.95,32,1.0,0.01,0.1
+exp5_large_batch_128,CnnPolicy,0.0001,0.99,128,1.0,0.01,0.1
+exp6_combo_high_lr_low_gamma,CnnPolicy,0.001,0.90,32,1.0,0.01,0.1
+exp7_combo_low_lr_high_gamma,CnnPolicy,0.00005,0.999,64,1.0,0.01,0.1
+exp8_aggressive_explore,CnnPolicy,0.0001,0.99,32,1.0,0.05,0.5
+exp9_low_eps_start,CnnPolicy,0.0001,0.99,32,0.5,0.01,0.1
+exp10_mlp_tuned,MlpPolicy,0.0005,0.95,64,1.0,0.05,0.2

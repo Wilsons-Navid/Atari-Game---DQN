@@ -1,5 +1,9 @@
 # Deep Q-Learning - Atari Agent
 
+## Gameplay Video
+
+[Watch the agent play Breakout](https://drive.google.com/file/d/1PpbXyLvc7mxTRpcyAZ4SOAoAaSJ9zotl/view?usp=sharing)
+
 ## Overview
 This project implements a Deep Q-Network (DQN) agent using Stable Baselines3 and Gymnasium to learn to play the Atari game Breakout. The agent observes raw game frames, processes them through a neural network to estimate Q-values for each action, and learns an optimal policy through experience replay and epsilon-greedy exploration. We compare two policy architectures (CNN and MLP), and each team member conducts 10 hyperparameter tuning experiments to analyze the impact of learning rate, discount factor, batch size, and exploration settings on agent performance.
 
@@ -138,7 +142,3 @@ Key takeaways from hyperparameter tuning:
 - **Gamma:** 0.99 is optimal for Breakout. Values below 0.95 make the agent too short-sighted to plan paddle movements.
 - **Batch size:** 32 is a good default. 128 can improve stability but slows training significantly.
 - **Epsilon decay:** Moderate exploration (10-20% of training) is best. Both too little (low start) and too much (50% fraction) hurt performance.
-
-## Gameplay Video
-
-[Watch the agent play Breakout](https://drive.google.com/file/d/1PpbXyLvc7mxTRpcyAZ4SOAoAaSJ9zotl/view?usp=sharing)

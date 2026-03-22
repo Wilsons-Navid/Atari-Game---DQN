@@ -1,7 +1,26 @@
 # Deep Q-Learning - Atari Agent
 
+## Overview
+This project implements a Deep Q-Network (DQN) agent using Stable Baselines3 and Gymnasium to learn to play the Atari game Breakout. The agent observes raw game frames, processes them through a neural network to estimate Q-values for each action, and learns an optimal policy through experience replay and epsilon-greedy exploration. We compare two policy architectures (CNN and MLP), and each team member conducts 10 hyperparameter tuning experiments to analyze the impact of learning rate, discount factor, batch size, and exploration settings on agent performance.
+
 ## Environment
-**BreakoutNoFrameskip-v0** — The agent learns to play Atari Breakout using a DQN.
+**BreakoutNoFrameskip-v0** — The agent controls a paddle to bounce a ball and break bricks. The environment provides raw pixel frames as observations, which are preprocessed to 84x84 grayscale images with 4-frame stacking.
+
+## Project Structure
+```
+├── train.py                    # Training script — trains DQN agent with configurable hyperparameters
+├── play.py                     # Playing script — loads trained model and runs episodes with greedy policy
+├── dqn_model.zip               # Best trained model (exp8_cnn_balanced, mean reward 3.80)
+├── requirements.txt            # Python dependencies
+├── experiments_member1.csv     # Wilsons' 10 experiment configurations
+├── experiments_member2.csv     # Mike's 10 experiment configurations
+├── experiments_member3.csv     # Gershorm's 10 experiment configurations
+├── results_member1.csv         # Wilsons' training results
+├── results_member2.csv         # Mike's training results
+├── results_member3.csv         # Gershorm's training results
+├── models/                     # Saved model files per member
+└── logs/                       # TensorBoard logs and evaluation data
+```
 
 ## Setup
 
@@ -83,6 +102,23 @@ python play.py --model models/<experiment_name>/best_model.zip --env BreakoutNoF
 | exp8_cnn_balanced | CnnPolicy | 0.0001 | 0.99 | 32 | 1.0 | 0.01 | 0.2 | **3.80 +/- 1.60** | **Best performing model overall (mean reward 3.80, best episode 5.0).** Large replay buffer (100k) and delayed learning starts (50k) allowed the agent to collect diverse experience before training, producing a much stronger policy. Saved as `dqn_model.zip`. |
 | exp9_low_eps_start | CnnPolicy | 0.0001 | 0.99 | 32 | 0.5 | 0.01 | 0.1 | 0.2 +/- 0.60 | Starting with epsilon=0.5 reduced early exploration. Without sufficient random experience, the replay buffer lacked diversity for effective learning. |
 | exp10_mlp_tuned | MlpPolicy | 0.0005 | 0.95 | 64 | 1.0 | 0.05 | 0.2 | 0.8 +/- 0.75 | Best MLP result. Tuned MLP with moderate LR, lower gamma, and extended exploration achieved the highest MLP mean reward. Shows that with the right hyperparameters, MLP can learn basic Breakout strategies. |
+
+## Hyperparameter Tuning Discussion
+
+### Wilsons (Member 1)
+- **Improved performance:** The baseline CNN config (lr=0.0001, gamma=0.99, batch=32) was already solid. Smaller batch size (16) and slower epsilon decay (0.3) matched baseline performance. Tuning the MLP with higher LR and larger batch (exp10) brought MLP from 0.1 to 0.5.
+- **Harmed performance:** Low gamma (0.9) completely failed (reward=0.0) — the agent was too short-sighted. Very low LR (0.00001) and very high gamma (0.999) both slowed convergence.
+- **Best config:** exp1_baseline and exp7_small_batch (CNN, reward=0.5). The default hyperparameters were hard to beat within 200k timesteps.
+
+### Mike (Member 2)
+- **Improved performance:** Large batch size of 128 (exp5) and aggressive exploration with 50% epsilon fraction (exp8) both achieved 0.6 reward. Higher LR helped MLP significantly (exp2: 0.6).
+- **Harmed performance:** Combining very low LR with very high gamma (exp7) produced zero reward — updates were too small and Q-targets too noisy. Mid-range LR with CNN (exp3) also failed unexpectedly (0.0).
+- **Best config:** exp2_mlp_high_lr, exp5_large_batch_128, and exp8_aggressive_explore (tied at 0.6). Diverse exploration and stable gradient updates were key.
+
+### Gershorm (Member 3)
+- **Improved performance:** Using a large replay buffer (100k) with delayed learning starts (50k) in exp8_cnn_balanced produced the best result across all 30 experiments (3.80). This allowed the agent to collect diverse experience before training began.
+- **Harmed performance:** Extended exploration (50% fraction in exp8_aggressive_explore) hurt here (0.1), and low epsilon start (0.5 in exp9) reduced replay buffer diversity (0.2).
+- **Best config:** exp8_cnn_balanced (CNN, lr=0.0001, gamma=0.99, buffer=100k, learning_starts=50k, reward=3.80). The key insight was that buffer size and learning starts matter as much as the standard hyperparameters.
 
 ## Policy Comparison: MLP vs CNN
 

@@ -93,7 +93,7 @@ def play(model_path, env_id, num_episodes=5, record_video=False, video_dir="vide
 
 def main():
     parser = argparse.ArgumentParser(description="Play Atari with a trained DQN agent")
-    parser.add_argument("--model", type=str, required=True,
+    parser.add_argument("--model", type=str, default="dqn_model.zip",
                         help="Path to trained model (.zip)")
     parser.add_argument("--env", type=str, default="BreakoutNoFrameskip-v0",
                         help="Atari environment ID")

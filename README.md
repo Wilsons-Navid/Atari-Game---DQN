@@ -103,7 +103,7 @@ python play.py --model models/<experiment_name>/best_model.zip --env BreakoutNoF
 | exp5_large_batch_128 | CnnPolicy | 0.0001 | 0.99 | 128 | 1.0 | 0.01 | 0.1 | 0.4 +/- 0.80 | Large batch size produced moderate results. Fewer update steps per timestep slowed learning slightly compared to smaller batches. |
 | exp6_combo_high_lr_low_gamma | CnnPolicy | 0.001 | 0.90 | 32 | 1.0 | 0.01 | 0.1 | 0.5 +/- 0.81 | High LR partially compensated for low gamma, allowing the agent to still learn within the shorter effective planning horizon. |
 | exp7_combo_low_lr_high_gamma | CnnPolicy | 0.00005 | 0.999 | 64 | 1.0 | 0.01 | 0.1 | 0.3 +/- 0.46 | Low LR + high gamma produced low-variance but modest results. The conservative updates kept training stable but slow. |
-| exp8_cnn_balanced | CnnPolicy | 0.0001 | 0.99 | 32 | 1.0 | 0.01 | 0.2 | **3.80 +/- 1.60** | **Best performing model overall (mean reward 3.80, best episode 5.0).** Large replay buffer (100k) and delayed learning starts (50k) allowed the agent to collect diverse experience before training, producing a much stronger policy. Saved as `dqn_model.zip`. |
+| exp8_cnn_balanced | CnnPolicy | 0.0001 | 0.99 | 32 | 1.0 | 0.01 | 0.2 | **3.80 +/- 1.60** | **Best performing model overall (mean reward 3.80, best episode 5.0).** Large replay buffer (1million) and delayed learning starts (50k) allowed the agent to collect diverse experience before training, producing a much stronger policy. Saved as `dqn_model.zip`. |
 | exp9_low_eps_start | CnnPolicy | 0.0001 | 0.99 | 32 | 0.5 | 0.01 | 0.1 | 0.2 +/- 0.60 | Starting with epsilon=0.5 reduced early exploration. Without sufficient random experience, the replay buffer lacked diversity for effective learning. |
 | exp10_mlp_tuned | MlpPolicy | 0.0005 | 0.95 | 64 | 1.0 | 0.05 | 0.2 | 0.8 +/- 0.75 | Best MLP result. Tuned MLP with moderate LR, lower gamma, and extended exploration achieved the highest MLP mean reward. Shows that with the right hyperparameters, MLP can learn basic Breakout strategies. |
 
@@ -122,7 +122,7 @@ python play.py --model models/<experiment_name>/best_model.zip --env BreakoutNoF
 ### Gershorm (Member 3)
 - **Improved performance:** Using a large replay buffer (1000,000) with delayed learning starts (50k) in exp8_cnn_balanced produced the best result across all 30 experiments (3.80). This allowed the agent to collect diverse experience before training began.
 - **Harmed performance:** Extended exploration (50% fraction in exp8_aggressive_explore) hurt here (0.1), and low epsilon start (0.5 in exp9) reduced replay buffer diversity (0.2).
-- **Best config:** exp8_cnn_balanced (CNN, lr=0.0001, gamma=0.99, buffer=100k, learning_starts=50k, reward=3.80). The key insight was that buffer size and learning starts matter as much as the standard hyperparameters.
+- **Best config:** exp8_cnn_balanced (CNN, lr=0.0001, gamma=0.99, buffer=1million, learning_starts=50k, reward=3.80). The key insight was that buffer size and learning starts matter as much as the standard hyperparameters.
 
 ## Policy Comparison: MLP vs CNN
 
@@ -133,7 +133,7 @@ python play.py --model models/<experiment_name>/best_model.zip --env BreakoutNoF
 
 **Discussion:**
 
-CNN is the clear winner for image-based Atari environments. Convolutional layers extract spatial features (paddle position, ball trajectory, brick layout) that a flat MLP cannot easily learn. The best overall model was a CNN (Gershorm's exp8_cnn_balanced: mean reward 3.80), which used a large replay buffer (100k) and delayed learning starts (50k) to collect diverse experience before training. This was nearly 5x better than the best MLP result (0.8).
+CNN is the clear winner for image-based Atari environments. Convolutional layers extract spatial features (paddle position, ball trajectory, brick layout) that a flat MLP cannot easily learn. The best overall model was a CNN (Gershorm's exp8_cnn_balanced: mean reward 3.80), which used a large replay buffer (1million) and delayed learning starts (50k) to collect diverse experience before training. This was nearly 5x better than the best MLP result (0.8).
 
 MLP's best result (Member 3, exp10: reward=0.8) shows that with tuned hyperparameters, MLP can learn basic strategies, but it cannot match CNN's ability to process visual information effectively.
 

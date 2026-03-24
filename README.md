@@ -120,7 +120,7 @@ python play.py --model models/<experiment_name>/best_model.zip --env BreakoutNoF
 - **Best config:** exp2_mlp_high_lr, exp5_large_batch_128, and exp8_aggressive_explore (tied at 0.6). Diverse exploration and stable gradient updates were key.
 
 ### Gershorm (Member 3)
-- **Improved performance:** Using a large replay buffer (100k) with delayed learning starts (50k) in exp8_cnn_balanced produced the best result across all 30 experiments (3.80). This allowed the agent to collect diverse experience before training began.
+- **Improved performance:** Using a large replay buffer (1000,000) with delayed learning starts (50k) in exp8_cnn_balanced produced the best result across all 30 experiments (3.80). This allowed the agent to collect diverse experience before training began.
 - **Harmed performance:** Extended exploration (50% fraction in exp8_aggressive_explore) hurt here (0.1), and low epsilon start (0.5 in exp9) reduced replay buffer diversity (0.2).
 - **Best config:** exp8_cnn_balanced (CNN, lr=0.0001, gamma=0.99, buffer=100k, learning_starts=50k, reward=3.80). The key insight was that buffer size and learning starts matter as much as the standard hyperparameters.
 
